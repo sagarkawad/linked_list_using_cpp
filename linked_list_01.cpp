@@ -82,21 +82,66 @@ void delete_at_tail(Node *head)
     temp2->next = NULL;
 };
 
-void delete_at_position(Node *head, int position)
+// void delete_at_position(Node *&head, int position)
+// {
+//     Node *temp = head;
+//     int i = position;
+
+//     if (position == 0)
+//     {
+//         delete_at_start(head);
+//     }
+
+//     while (i < position - 1)
+//     {
+//         temp = temp->next;
+//         i++;
+//         if (temp->next == NULL)
+//         {
+//             cout << "false operation" << endl;
+//         }
+//     };
+
+//     // Node *temp2 = temp->next;
+//     // temp->next = temp->next->next;
+//     // free(temp2);
+// };
+
+void delete_at_position(Node *&head, int position)
 {
     Node *temp = head;
-    int i = position;
+    int count = 0;
+    int state = 1;
 
-    if (position == )
-
-    while (i < position - 1)
+    if (position == 0)
     {
-        temp = temp->next;
-        i++;
-    };
+        delete_at_start(head);
+    }
+    else if (position != 0)
+    {
 
-    temp->next = temp->next->next;
-    free(temp->next);
+        while (count < position - 1)
+        {
+            cout << "\ncount = " << count;
+            temp = temp->next;
+            count++;
+
+            if (temp->next == NULL)
+            {
+                cout << "\n false operation!" << endl;
+                state = 0;
+                break;
+            }
+        }
+        cout << "\nand here we are, out of the while loop from the function delete at position " << position;
+        if (state == 1)
+        {
+            Node *temp2 = temp->next;
+            temp->next = temp->next->next;
+            temp2->next = NULL;
+            free(temp2);
+        }
+    }
 };
 
 void display(Node *head)
@@ -110,7 +155,7 @@ void display(Node *head)
         temp = temp->next;
     }
     // cout << temp << endl;
-    cout << "NULL";
+    cout << "NULL/" << temp;
 };
 
 int main()
@@ -130,11 +175,7 @@ int main()
     // insert_at_position(head, 100, 1);
     // insert_at_position(head, 200, 2);
     display(head);
-    delete_at_start(head);
-    display(head);
-    delete_at_start(head);
-    display(head);
-    delete_at_tail(head);
+    delete_at_position(head, 6);
     display(head);
 
     return 0;
